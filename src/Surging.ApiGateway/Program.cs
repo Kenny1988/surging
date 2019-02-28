@@ -24,7 +24,7 @@ namespace Surging.ApiGateway
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
-                .UseUrls("http://*:729")
+                .UseUrls("http://*:8001")//网关的监听端口，也就是部署的时候容器运行的端口，自己根据情况进行配置
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()

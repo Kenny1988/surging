@@ -69,15 +69,15 @@
   },
   "EventBus": {
     "EventBusConnection": "${EventBusConnection}|localhost",
-    "EventBusUserName": "${EventBusUserName}|guest",
-    "EventBusPassword": "${EventBusPassword}|guest",
+    "EventBusUserName": "${EventBusUserName}|guest", //用户名
+    "EventBusPassword": "${EventBusPassword}|guest",//密码
     "VirtualHost": "${VirtualHost}|/",
-    "MessageTTL": "${MessageTTL}|30000",
-    "RetryCount": "${RetryCount}|1",
-    "FailCount": "${FailCount}|3",
-    "prefetchCount": "${PrefetchCount}|0",
-    "BrokerName": "${BrokerName}|surging_demo",
-    "Port": "${EventBusPort}|5672"
+    "MessageTTL": "${MessageTTL}|30000",//消息过期时间,单位为毫秒
+    "RetryCount": "${RetryCount}|1",//重试次数,这里设置的延迟队列，只能设置为1
+    "FailCount": "${FailCount}|3",//处理失败流程重试次数，如果出现异常，会进行重试
+    "prefetchCount": "${PrefetchCount}|0",//设置均匀分配消费者的个数
+    "BrokerName": "${BrokerName}|surging_demo",//exchange 名称
+    "Port": "${EventBusPort}|5672"//端口
   },
   "Zookeeper": {
     "ConnectionString": "${Zookeeper_ConnectionString}|127.0.0.1:2181",

@@ -11,14 +11,17 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Surging.Core.CPlatform.Runtime.Server;
+using Surging.Core.ProxyGenerator.Diagnostics;
+using Surging.Core.CPlatform.Diagnostics;
 
 namespace Surging.Core.ProxyGenerator
 {
    public class ServiceProxyModule: EnginePartModule
     {
-        public override void Initialize(CPlatformContainer serviceProvider)
+        public override void Initialize(AppModuleContext context)
         {
-             serviceProvider.GetInstances<IServiceProxyFactory>();
+            var serviceProvider = context.ServiceProvoider;
+            serviceProvider.GetInstances<IServiceProxyFactory>();
             if (AppConfig.ServerOptions.ReloadOnChange)
             {
                 new ServiceRouteWatch(serviceProvider,
@@ -45,8 +48,7 @@ namespace Surging.Core.ProxyGenerator
         protected override void RegisterBuilder(ContainerBuilderWrapper builder)
         {
             base.RegisterBuilder(builder);
-
+            builder.RegisterType<RpcTransportDiagnosticProcessor>().As<ITracingDiagnosticProcessor>().SingleInstance();
         }
-        
     }
 }

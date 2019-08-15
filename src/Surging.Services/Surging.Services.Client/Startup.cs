@@ -4,7 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Surging.Apm.Skywalking.Abstractions.Common.Tracing;
+using Surging.Apm.Skywalking.Abstractions.Tracing;
 using Surging.Core.Caching.Configurations;
+using Surging.Core.CPlatform.Diagnostics;
 using Surging.Core.CPlatform.Transport.Implementation;
 using Surging.Core.CPlatform.Utilities;
 using Surging.Core.EventBusRabbitMQ.Configurations;
@@ -74,8 +77,11 @@ namespace Surging.Services.Client
         /// <param name="serviceProxyFactory"></param>
         public static void Test(IServiceProxyFactory serviceProxyFactory)
         {
+            var  tracingContext =  ServiceLocator.GetService<ITracingContext>();
             Task.Run(async () =>
             {
+                RpcContext.GetContext().SetAttachment("xid",124);
+
                 var userProxy = serviceProxyFactory.CreateProxy<IUserService>("User");
                 var e = userProxy.SetSex(Sex.Woman).GetAwaiter().GetResult();
                 var v = userProxy.GetUserId("fanly").GetAwaiter().GetResult();
@@ -140,7 +146,8 @@ namespace Surging.Services.Client
             {
                 Name = "fanly",
                 Age = 18,
-                UserId = 1
+                UserId = 1,
+                Sex = "Man"
             }));
             string path = "api/user/getuser";
             string serviceKey = "User";

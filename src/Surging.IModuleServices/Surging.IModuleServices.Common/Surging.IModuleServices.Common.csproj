@@ -5,6 +5,7 @@
      <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
      <PackageId>测试模块</PackageId>
      <Description>测试</Description>
+     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

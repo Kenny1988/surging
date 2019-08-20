@@ -31,7 +31,7 @@
     ]
   }, //如果引用多个同类型的组件，需要配置Packages，如果是自定义按需引用，无需配置Packages
   "Consul": {
-    "ConnectionString": "${Register_Conn}|127.0.0.1:8500", // "127.0.0.1:8500,127.0.0.1:9500",
+    "ConnectionString": "${Register_Conn}|192.168.30.103:8500", // "127.0.0.1:8500,127.0.0.1:9500",
     "SessionTimeout": "${Register_SessionTimeout}|50",
     "RoutePath": "${Register_RoutePath}",
     "ReloadOnChange": true,
@@ -119,7 +119,7 @@
     }
   },
   "EventBus": {
-    "EventBusConnection": "${EventBusConnection}|localhost",
+    "EventBusConnection": "${EventBusConnection}|192.168.30.103",
     "EventBusUserName": "${EventBusUserName}|guest", //用户名
     "EventBusPassword": "${EventBusPassword}|guest",//密码
     "VirtualHost": "${VirtualHost}|/",

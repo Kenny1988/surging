@@ -26,5 +26,6 @@
     <PropertyGroup>
         <Protobuf_NoWarnMissingExpected>true</Protobuf_NoWarnMissingExpected>
         <Protobuf_TouchMissingExpected>true</Protobuf_TouchMissingExpected>
+        <LangVersion>7.3</LangVersion>
     </PropertyGroup>
 </Project>

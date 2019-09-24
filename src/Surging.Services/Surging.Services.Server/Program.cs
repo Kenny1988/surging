@@ -29,6 +29,7 @@ namespace Surging.Services.Server
     {
         static void Main(string[] args)
         {
+            //1、Encoding默认不支持GB2312，需要使用Encoding.RegisterProvider进行注册
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var host = new ServiceHostBuilder()
                 .RegisterServices(builder =>

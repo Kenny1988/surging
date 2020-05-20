@@ -38,7 +38,10 @@ namespace Surging.Core.ServiceHosting.Internal.Implementation
             var hostingServices = RegisterServices();
             var applicationServices = services.Clone();
             var hostingServiceProvider = services.BuildServiceProvider();
+
+            //将services中的服务填充到Autofac中
             hostingServices.Populate(services);
+
             var hostLifetime = hostingServiceProvider.GetService<IHostLifetime>();
             var host = new ServiceHost(hostingServices,hostingServiceProvider, hostLifetime,_mapServicesDelegates);
             var container= host.Initialize();

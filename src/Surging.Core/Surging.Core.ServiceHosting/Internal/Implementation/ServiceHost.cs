@@ -11,13 +11,31 @@ namespace Surging.Core.ServiceHosting.Internal.Implementation
 {
     public class ServiceHost : IServiceHost
     {
+        /// <summary>
+        ///容器构建器
+        /// </summary>
         private readonly ContainerBuilder _builder;
         private IStartup _startup;
+        /// <summary>
+        /// 容器服务
+        /// </summary>
         private IContainer _applicationServices;
+        /// <summary>
+        /// 主机生命周期
+        /// </summary>
         private readonly IHostLifetime _hostLifetime;
+        /// <summary>
+        /// 服务提供器
+        /// </summary>
         private readonly IServiceProvider _hostingServiceProvider;
+        /// <summary>
+        /// 容器委托
+        /// </summary>
         private readonly List<Action<IContainer>> _mapServicesDelegates;
-        private IApplicationLifetime _applicationLifetime; 
+        /// <summary>
+        /// 应用程生命周期
+        /// </summary>
+        private IApplicationLifetime _applicationLifetime;
 
         public ServiceHost(ContainerBuilder builder,
             IServiceProvider hostingServiceProvider,

@@ -17,6 +17,8 @@ namespace Surging.Core.ServiceHosting.Startup.Implementation
         }
 
         public object StartupInstance { get; }
+
+        //下面两个委托的实现定义在ConventionBasedStartup
         public Func<ContainerBuilder, IContainer> ConfigureServicesDelegate { get; }
         public Action<IContainer> ConfigureDelegate { get; }
 

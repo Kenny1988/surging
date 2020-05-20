@@ -8,10 +8,18 @@ using System.Text;
 
 namespace Surging.Core.ServiceHosting.Startup.Implementation
 {
+    /// <summary>
+    /// 如果我们再应用中将服务和中间件注册的实现定义在启动类型中，当WebHost被启动的时候，会创建一个
+    /// 类型为ConventionBasedStartup的Startup对象
+    /// </summary>
     public class ConventionBasedStartup : IStartup
     {
         private readonly StartupMethods _methods;
 
+        /// <summary>
+        /// ConventionBasedStartup 是根据一个类型为StartupMethods对象创建的。
+        /// </summary>
+        /// <param name="methods"></param>
         public ConventionBasedStartup(StartupMethods methods)
         {
             _methods = methods;

@@ -190,6 +190,7 @@ namespace Surging.Core.CPlatform
         /// </summary>
         public ServiceDescriptor()
         {
+            //Key值不区分大小写
             Metadatas = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
         }
 

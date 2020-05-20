@@ -14,6 +14,19 @@ namespace Surging.Core.ServiceHosting.Internal.Implementation
 {
     public class StartupLoader
     {
+        /// <summary>
+        /// 创建一个StartupMethods的实例，其中运行用于配置应用程序服务和操作应用程序的请求管道。
+        /// 使用基于约定的启东时，初始化服务的过程如下所示：
+        /// ①主机查找具有签名为  IServiceProvider ConfigureServices(IServiceCollection ***)的方法
+        /// 或者Void ConfigureServices(IServiceCollertion ***)
+        /// 
+        /// ConfigureServices返回值是void
+        /// </summary>
+        /// <param name="hostingServiceProvider"></param>
+        /// <param name="config"></param>
+        /// <param name="startupType"></param>
+        /// <param name="environmentName"></param>
+        /// <returns></returns>
         public static StartupMethods LoadMethods(IServiceProvider hostingServiceProvider, IConfigurationBuilder config, Type startupType, string environmentName)
         {
             var configureMethod = FindConfigureDelegate(startupType, environmentName);
@@ -51,6 +64,22 @@ namespace Surging.Core.ServiceHosting.Internal.Implementation
             return new StartupMethods(instance, configureMethod.Build(instance), configureServices);
         }
 
+        /// <summary>
+        /// 启动类(Startup)的解析
+        /// 
+        /// 如果没有通过调用WebHostBuilder的扩展方法(UseStartup)显示注册，那么FindStartupType方法会被调用来解析出正确的
+        /// 启动类型。当FindStartupType方法被执行并成功加载了提供的程序集之后，它会按照约定的启动类型全名从该程序集加载
+        /// 启动类型，候选的启动类型全名按照悬着优先级排列如下（环境名称优先，无命名空间优先）：
+        /// Startup{EnvironmentName} （无命名空间）
+        /// {StartupAssemblyName}.Startup{EnvironmentName}
+        /// Startup（无命名空间）
+        /// {StartupAssemblyName}.Startup{EnvironmentName}
+        /// **. Startup{EnvironmentName}（任意命名空间）
+        /// **. Startup（任意命名空间）
+        /// </summary>
+        /// <param name="startupAssemblyName">程序名称</param>
+        /// <param name="environmentName">当前运行环境</param>
+        /// <returns></returns>
         public static Type FindStartupType(string startupAssemblyName, string environmentName)
         {
             if (string.IsNullOrEmpty(startupAssemblyName))

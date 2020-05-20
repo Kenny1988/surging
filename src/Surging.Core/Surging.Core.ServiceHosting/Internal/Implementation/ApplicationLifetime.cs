@@ -50,7 +50,9 @@ namespace Surging.Core.ServiceHosting.Internal.Implementation
                                          ex);
             }
         }
-
+        ///锁定CTS以同步多个对StopApplication的调用。这保证了第一次调用
+        ///在后续调用StopApplication之前，执行StopApplication及其回调直至完成，
+        ///由于第一个调用已经被请求取消，所以该函数将不执行。
         public void StopApplication()
         {
             lock (_stoppingSource)
@@ -69,6 +71,7 @@ namespace Surging.Core.ServiceHosting.Internal.Implementation
 
         private void ExecuteHandlers(CancellationTokenSource cancel)
         { 
+            //判断操作是否已经取消
             if (cancel.IsCancellationRequested)
             {
                 return;

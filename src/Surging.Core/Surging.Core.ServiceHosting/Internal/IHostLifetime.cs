@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Surging.Core.ServiceHosting.Internal
 {
+    /// <summary>
+    /// Host的生命周期
+    /// </summary>
    public interface IHostLifetime
     {
          
